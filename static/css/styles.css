@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --ink: #192b3a;
+  --muted: #647582;
+  --accent: #2d6a62;
+  --accent-dark: #214e49;
+  --paper: #f4f6f3;
+  --line: #dce5df;
+  --white: #fff;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.7;
+}
+
+h1, h2, h3, .navbar-brand {
+  color: var(--ink);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.08; }
+h2 { margin-bottom: 1.25rem; font-size: clamp(1.4rem, 3vw, 1.8rem); }
+h3 { margin-bottom: .65rem; font-size: 1.05rem; letter-spacing: -0.015em; }
+a { color: var(--accent-dark); }
+
+.site-nav {
+  background: rgba(255, 255, 255, .92);
+  border-bottom: 1px solid var(--line);
+}
+
+.navbar-brand { font-size: 1.1rem; }
+.site-nav .nav-link { color: var(--ink); font-weight: 600; }
+.site-nav .nav-link:hover, .site-nav .nav-link:focus { color: var(--accent); }
+.nav-contact { padding: .55rem 1rem !important; border: 1px solid var(--line); border-radius: 999px; }
+
+.page-shell { width: min(100% - 2rem, 1100px); flex: 1; padding-top: 3.5rem; padding-bottom: 5rem; }
+.resume-hero { padding: 1.5rem 0 4rem; }
+.eyebrow { margin-bottom: .75rem; color: var(--accent); font-size: .72rem; font-weight: 700; letter-spacing: .15em; }
+.hero-summary { max-width: 620px; margin: 1.25rem 0 1.6rem; color: var(--muted); font-size: 1.08rem; }
+.profile-image { width: min(100%, 245px); border-radius: 44% 44% 38% 38%; }
+.btn-accent { padding: .75rem 1.15rem; border: 0; border-radius: .55rem; background: var(--accent); color: var(--white); font-weight: 700; }
+.btn-accent:hover, .btn-accent:focus { background: var(--accent-dark); color: var(--white); }
+
+.resume-layout { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 2rem; align-items: start; }
+.resume-aside { position: sticky; top: 1.5rem; padding: 1.4rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--white); }
+.resume-aside p:not(.eyebrow) { margin-bottom: 1.25rem; font-size: .94rem; }
+.small-note, .form-hint { color: var(--muted); font-size: .82rem; }
+.resume-sections { display: grid; gap: 1rem; }
+.content-card { padding: clamp(1.35rem, 4vw, 2rem); border: 1px solid var(--line); border-radius: 1rem; background: var(--white); box-shadow: 0 12px 32px rgba(25, 43, 58, .035); scroll-margin-top: 1.5rem; }
+.content-card > :last-child { margin-bottom: 0; }
+.muted { color: var(--muted); font-size: .9rem; }
+.timeline-entry { padding-left: 1rem; border-left: 2px solid #b7d1c8; }
+.clean-list { margin: 0; padding-left: 1.1rem; color: var(--muted); }
+.clean-list li + li { margin-top: .35rem; }
+.tech-list { display: flex; flex-wrap: wrap; gap: .5rem; }
+.tech-list span { padding: .35rem .7rem; border: 1px solid var(--line); border-radius: 999px; background: #f7faf8; color: var(--accent-dark); font-size: .82rem; font-weight: 600; }
+
+.contact-heading { max-width: 680px; padding: 1.5rem 0 2.5rem; }
+.contact-heading h1 { font-size: clamp(2.5rem, 6vw, 4rem); }
+.contact-layout h2 { font-size: 1.45rem; }
+.contact-detail { display: grid; gap: .2rem; margin: 1.5rem 0; }
+.detail-label { color: var(--muted); font-size: .83rem; font-weight: 600; }
+.form-control { padding: .7rem .85rem; border-color: var(--line); }
+.form-control:focus { border-color: #78a79c; box-shadow: 0 0 0 .2rem rgba(45, 106, 98, .12); }
+.form-hint { margin-top: .9rem; }
+
+.site-footer { padding: 1.35rem 0; border-top: 1px solid var(--line); background: var(--white); color: var(--muted); font-size: .85rem; }
+.site-footer a { text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+
+@media (max-width: 767.98px) {
+  .page-shell { padding-top: 2rem; }
+  .resume-hero { padding: .5rem 0 2.5rem; text-align: center; }
+  .hero-summary { margin-right: auto; margin-left: auto; }
+  .resume-layout { grid-template-columns: 1fr; }
+  .resume-aside { position: static; }
+}
