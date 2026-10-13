@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="resume-hero row align-items-center g-4" aria-labelledby="resume-title">
+    <div class="col-md-8 order-2 order-md-1">
+      <p class="eyebrow">РЕЗЮМЕ · ВЕБРОЗРОБКА</p>
+      <h1 id="resume-title">Ваше ім’я Прізвище</h1>
+      <p class="hero-summary">Студент(ка) та початківець у веброзробці. Цікавлюся створенням зрозумілих і доступних вебсайтів.</p>
+      <a class="btn btn-accent" href="{{ url_for('contacts') }}">Зв’язатися зі мною</a>
+    </div>
+    <div class="col-md-4 order-1 order-md-2 text-center text-md-end">
+      <img class="profile-image" src="{{ url_for('static', filename='images/profile.svg') }}" alt="Зображення-заглушка для фотографії автора резюме">
+    </div>
+  </section>
+
+  <div class="resume-layout">
+    <aside class="resume-aside" aria-label="Коротка інформація">
+      <p class="eyebrow">КОНТАКТНА ІНФОРМАЦІЯ</p>
+      <p><strong>Електронна пошта</strong><br><a href="mailto:student@example.com">student@example.com</a></p>
+      <p><strong>Івано-Франківськ</strong><br>Україна</p>
+      <p class="small-note">Ви сказали свої дані не вказувати тому всюди заглушки.</p>
+    </aside>
+
+    <div class="resume-sections">
+      <section class="content-card" id="about" aria-labelledby="about-title">
+        <p class="eyebrow">01 · ПРОФІЛЬ</p>
+        <h2 id="about-title">Про себе</h2>
+        <p>Я вивчаю вебпрограмування та працюю з Python і Flask. Мені цікаво, як поєднати зрозумілий інтерфейс із простою та надійною логікою сайту. Зараз розвиваю навички HTML, CSS і створення вебзастосунків.</p>
+      </section>
+
+      <section class="content-card" id="education" aria-labelledby="education-title">
+        <p class="eyebrow">02 · НАВЧАННЯ</p>
+        <h2 id="education-title">Освіта</h2>
+        <div class="timeline-entry">
+          <h3>Назва навчального закладу</h3>
+          <p class="muted mb-1">Спеціальність або освітня програма · Рік вступу — теперішній час</p>
+          <p class="mb-0">Навчаюся основ вебпрограмування, алгоритмів і розробки застосунків.</p>
+        </div>
+      </section>
+
+      <section class="content-card" id="skills" aria-labelledby="skills-title">
+        <p class="eyebrow">03 · МОЇ СИЛЬНІ СТОРОНИ</p>
+        <h2 id="skills-title">Навички та технології</h2>
+        <div class="row g-4">
+          <div class="col-sm-6">
+            <h3>Навички</h3>
+            <ul class="clean-list">
+              <li>Структурування вебсторінок</li>
+              <li>Робота з Git і GitHub</li>
+              <li>Уважність до деталей</li>
+              <li>Самостійне вивчення нових тем</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <h3>Технології</h3>
+            <div class="tech-list" aria-label="Технології, які вивчаю">
+              <span>Python</span><span>Flask</span><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>Jinja</span><span>Git</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-card" id="experience" aria-labelledby="experience-title">
+        <p class="eyebrow">04 · ПРАКТИКА</p>
+        <h2 id="experience-title">Досвід роботи та проєкти</h2>
+        <div class="timeline-entry">
+          <h3>Навчальний сайт на Flask</h3>
+          <p class="muted mb-2">Навчальний проєкт · 2026</p>
+          <p class="mb-0">Створив(ла) вебсайт із маршрутами для резюме й контактів, шаблонами Jinja, формою-заглушкою та адаптивним оформленням.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+{% endblock %}

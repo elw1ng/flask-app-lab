@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="contact-heading" aria-labelledby="contacts-title">
+    <p class="eyebrow">БУДЬМО НА ЗВ’ЯЗКУ</p>
+    <h1 id="contacts-title">Контакти</h1>
+    <p class="hero-summary">Напишіть повідомлення через демонстраційну форму або скористайтеся електронною поштою.</p>
+  </section>
+
+  <div class="row g-4 contact-layout">
+    <section class="col-lg-5" aria-labelledby="contact-info-title">
+      <div class="content-card h-100">
+        <p class="eyebrow">КОНТАКТНІ ДАНІ</p>
+        <h2 id="contact-info-title">Як зі мною зв’язатися</h2>
+        <p class="contact-detail"><span class="detail-label">Електронна пошта</span><a href="mailto:student@example.com">student@example.com</a></p>
+        <p class="contact-detail"><span class="detail-label">Місце перебування</span>Україна</p>
+        <p class="small-note">Це навчальний приклад. Замініть адресу та контактні дані на власні.</p>
+      </div>
+    </section>
+
+    <section class="col-lg-7" aria-labelledby="message-title">
+      <div class="content-card">
+        <p class="eyebrow">ФОРМА ЗВОРОТНОГО ЗВ’ЯЗКУ</p>
+        <h2 id="message-title">Надіслати повідомлення</h2>
+
+        {% if submitted %}
+          <div class="alert alert-success" role="status">Дякую! Це демонстраційна форма: повідомлення не надсилалося і не зберігалося.</div>
+        {% endif %}
+
+        <form action="{{ url_for('contacts') }}" method="post">
+          <div class="mb-3">
+            <label for="name" class="form-label">Ваше ім’я</label>
+            <input class="form-control" type="text" id="name" name="name" autocomplete="name" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Електронна пошта</label>
+            <input class="form-control" type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Повідомлення</label>
+            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button class="btn btn-accent" type="submit">Надіслати повідомлення</button>
+          <p class="form-hint mb-0">Форма створена для демонстрації й поки не надсилає дані.</p>
+        </form>
+      </div>
+    </section>
+  </div>
+{% endblock %}
