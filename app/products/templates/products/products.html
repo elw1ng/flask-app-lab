@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Products · FlaskApp{% endblock %}
+
+{% block content %}
+  <section aria-labelledby="products-title">
+    <p class="eyebrow">BLUEPRINT · PRODUCTS</p>
+    <h1 id="products-title">Products</h1>
+    <div class="products-grid">
+      {% for product in products %}
+        <article class="content-card product-card">
+          <h2>{{ product.name }}</h2>
+          <p class="product-price">${{ product.price }}</p>
+          <p class="muted">{{ product.description }}</p>
+          <a class="btn btn-accent" href="{{ url_for('products.detail', product_id=product.id) }}">View details</a>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}
