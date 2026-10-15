@@ -22,4 +22,10 @@ def resume():
 @app.route("/contacts", methods=["GET", "POST"])
 def contacts():
     submitted = request.method == "POST"
-    return render_template("contacts.html", title="Контакти", submitted=submitted)
+    form_data = request.form if submitted else {}
+    return render_template(
+        "contacts.html",
+        title="Контакти",
+        submitted=submitted,
+        form_data=form_data,
+    )
