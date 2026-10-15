@@ -8,7 +8,7 @@ def greetings(name):
     name = name.upper()
     age = request.args.get("age", None, int)
     return render_template(
-        "users/hi.html",
+        "hi.html",
         title="Greeting Page",
         name=name,
         age=age,

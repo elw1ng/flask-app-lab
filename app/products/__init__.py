@@ -4,7 +4,7 @@ products_bp = Blueprint(
     "products",
     __name__,
     url_prefix="/products",
-    template_folder="templates",
+    template_folder="templates/products",
 )
 
-from . import views  # noqa: E402,F401
+from . import views

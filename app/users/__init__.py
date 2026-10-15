@@ -4,7 +4,7 @@ users_bp = Blueprint(
     "users",
     __name__,
     url_prefix="/users",
-    template_folder="templates",
+    template_folder="templates/users",
 )
 
-from . import views  # noqa: E402,F401
+from . import views

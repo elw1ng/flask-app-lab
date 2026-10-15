@@ -26,7 +26,7 @@ products = [
 
 @products_bp.route("/")
 def index():
-    return render_template("products/products.html", title="Products", products=products)
+    return render_template("products.html", title="Products", products=products)
 
 
 @products_bp.route("/<int:product_id>")
@@ -35,7 +35,7 @@ def detail(product_id):
     if product is None:
         abort(404)
     return render_template(
-        "products/detail_product.html",
+        "detail_product.html",
         title=product["name"],
         product=product,
     )
