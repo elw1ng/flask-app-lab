@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Сторінка привітання · Flask{% endblock %}
+
+{% block content %}
+  <section class="greeting-shell" aria-labelledby="greeting-title">
+    <nav class="greeting-nav" aria-label="Меню сторінки привітання">
+      <a class="greeting-brand" href="{{ url_for('main') }}">FlaskApp</a>
+      <a href="{{ url_for('users.greetings', name='John', age=30) }}">Greet John</a>
+      <a href="{{ url_for('users.admin') }}">Admin</a>
+    </nav>
+
+    <div class="greeting-content">
+      <p class="eyebrow">BLUEPRINT · USERS</p>
+      <h1 id="greeting-title">Hello :)</h1>
+      <p class="greeting-name">User: <strong>{{ name }}</strong></p>
+      {% if age is not none %}
+        <p class="greeting-age">Age: {{ age }}</p>
+      {% else %}
+        <p class="greeting-age greeting-age-muted">Age: Not provided</p>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}
