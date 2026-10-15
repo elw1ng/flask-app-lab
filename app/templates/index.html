@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="resume-hero" aria-labelledby="welcome-title">
+    <p class="eyebrow">FLASK · ЛАБОРАТОРНА РОБОТА №3</p>
+    <h1 id="welcome-title">Вітаю на моєму сайті</h1>
+    <p class="hero-summary">Цей застосунок побудовано на Flask. Перейдіть до резюме або відкрийте окрему домашню сторінку.</p>
+    <div class="d-flex flex-wrap gap-3">
+      <a class="btn btn-accent" href="{{ url_for('resume') }}">Переглянути резюме</a>
+      <a class="btn btn-outline-secondary" href="{{ url_for('home') }}">Домашня сторінка</a>
+    </div>
+  </section>
+{% endblock %}
