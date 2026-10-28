@@ -106,6 +106,34 @@ a { color: var(--accent-dark); }
 .product-detail { max-width: 760px; }
 .product-detail h1 { font-size: clamp(2.5rem, 6vw, 4rem); }
 
+.profile-theme-light { background: #fff; color: #192b3a; }
+.profile-theme-dark {
+  --ink: #f1f5f7;
+  --muted: #bac6cc;
+  --line: #465761;
+  background: #202c33;
+  border-color: #465761;
+  color: #f1f5f7;
+}
+.profile-theme-dark h1, .profile-theme-dark h2, .profile-theme-dark h3,
+.profile-theme-dark .form-label, .profile-theme-dark .detail-label { color: #f1f5f7; }
+.profile-theme-dark .form-control, .profile-theme-dark .form-select {
+  border-color: #52636d;
+  background: #2b3942;
+  color: #f1f5f7;
+}
+.profile-theme-dark .form-control:focus, .profile-theme-dark .form-select:focus {
+  border-color: #83bdb0;
+  box-shadow: 0 0 0 .2rem rgba(131, 189, 176, .2);
+}
+.profile-theme-dark .table {
+  --bs-table-color: #f1f5f7;
+  --bs-table-bg: #26343d;
+  --bs-table-striped-bg: #2e3d46;
+  --bs-table-striped-color: #f1f5f7;
+  --bs-table-border-color: #465761;
+}
+
 @media (max-width: 767.98px) {
   .greeting-shell { grid-template-columns: 1fr; gap: 1rem; }
   .greeting-nav { flex-direction: row; flex-wrap: wrap; align-items: center; }

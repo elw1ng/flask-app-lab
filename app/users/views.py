@@ -87,11 +87,16 @@ def profile():
     if login_redirect:
         return login_redirect
 
+    theme = request.cookies.get("profile_theme", "light")
+    if theme not in {"light", "dark"}:
+        theme = "light"
+
     return render_template(
         "profile.html",
         title="Профіль",
         username=session["username"],
         cookies=_profile_cookies(),
+        theme=theme,
     )
 
 
@@ -175,4 +180,28 @@ def delete_all_cookies():
         flash("Усі користувацькі cookies видалено.", "success")
     else:
         flash("Немає користувацьких cookies для видалення.", "warning")
+    return response
+
+
+@users_bp.route("/theme", methods=["POST"])
+def choose_theme():
+    login_redirect = _login_redirect()
+    if login_redirect:
+        return login_redirect
+
+    theme = request.form.get("theme", "")
+    if theme not in {"light", "dark"}:
+        flash("Вибери світлу або темну схему.", "danger")
+        return redirect(url_for("users.profile"))
+
+    response = make_response(redirect(url_for("users.profile")))
+    response.set_cookie(
+        "profile_theme",
+        theme,
+        max_age=60 * 60 * 24 * 365,
+        path="/",
+        httponly=True,
+        samesite="Lax",
+    )
+    flash("Кольорову схему збережено.", "success")
     return response

@@ -3,10 +3,18 @@
 {% block title %}Профіль · FlaskApp{% endblock %}
 
 {% block content %}
-  <section class="content-card mx-auto" style="max-width: 760px" aria-labelledby="profile-title">
+  <section class="content-card mx-auto profile-theme-{{ theme }}" style="max-width: 760px" aria-labelledby="profile-title">
     <p class="eyebrow">ОСОБИСТИЙ ПРОСТІР</p>
     <h1 id="profile-title">Профіль</h1>
     <p class="hero-summary">Вітаю, <strong>{{ username }}</strong>!</p>
+
+    <form method="post" action="{{ url_for('users.choose_theme') }}" class="mb-4">
+      <p class="mb-2">Кольорова схема:</p>
+      <div class="d-flex flex-wrap gap-2">
+        <button class="btn btn-outline-secondary" type="submit" name="theme" value="light" aria-pressed="{{ 'true' if theme == 'light' else 'false' }}">Світла</button>
+        <button class="btn btn-outline-secondary" type="submit" name="theme" value="dark" aria-pressed="{{ 'true' if theme == 'dark' else 'false' }}">Темна</button>
+      </div>
+    </form>
 
     <form method="post" action="{{ url_for('users.logout') }}">
       <button class="btn btn-outline-secondary" type="submit">Вийти</button>
