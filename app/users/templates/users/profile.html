@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Профіль · FlaskApp{% endblock %}
+
+{% block content %}
+  <section class="content-card mx-auto" style="max-width: 760px" aria-labelledby="profile-title">
+    <p class="eyebrow">ОСОБИСТИЙ ПРОСТІР</p>
+    <h1 id="profile-title">Профіль</h1>
+    <p class="hero-summary">Вітаю, <strong>{{ username }}</strong>!</p>
+
+    <form method="post" action="{{ url_for('users.logout') }}">
+      <button class="btn btn-outline-secondary" type="submit">Вийти</button>
+    </form>
+  </section>
+{% endblock %}

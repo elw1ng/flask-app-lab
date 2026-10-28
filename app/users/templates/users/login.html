@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Вхід · FlaskApp{% endblock %}
+
+{% block content %}
+  <section class="content-card mx-auto" style="max-width: 620px" aria-labelledby="login-title">
+    <p class="eyebrow">ОБЛІКОВИЙ ЗАПИС</p>
+    <h1 id="login-title">Вхід</h1>
+    <p class="muted">Для демонстрації введи логін і пароль, задані в коді застосунку.</p>
+
+    <form method="post" action="{{ url_for('users.login') }}">
+      <div class="mb-3">
+        <label for="username" class="form-label">Ім’я користувача</label>
+        <input class="form-control" type="text" id="username" name="username" value="{{ username }}" autocomplete="username" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Пароль</label>
+        <input class="form-control" type="password" id="password" name="password" autocomplete="current-password" required>
+      </div>
+      <button class="btn btn-accent" type="submit">Увійти</button>
+    </form>
+  </section>
+{% endblock %}
