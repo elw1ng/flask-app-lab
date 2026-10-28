@@ -11,5 +11,57 @@
     <form method="post" action="{{ url_for('users.logout') }}">
       <button class="btn btn-outline-secondary" type="submit">Вийти</button>
     </form>
+
+    <hr class="my-4">
+
+    <section aria-labelledby="cookie-add-title">
+      <h2 id="cookie-add-title">Додати cookie</h2>
+      <form method="post" action="{{ url_for('users.add_cookie') }}">
+        <div class="mb-3">
+          <label for="cookie-key" class="form-label">Ключ</label>
+          <input class="form-control" id="cookie-key" name="key" type="text" pattern="[A-Za-z0-9_-]+" required>
+        </div>
+        <div class="mb-3">
+          <label for="cookie-value" class="form-label">Значення</label>
+          <input class="form-control" id="cookie-value" name="value" type="text" required>
+        </div>
+        <div class="mb-3">
+          <label for="cookie-age" class="form-label">Термін дії (секунди)</label>
+          <input class="form-control" id="cookie-age" name="max_age" type="number" min="1" value="3600" required>
+        </div>
+        <button class="btn btn-accent" type="submit">Зберегти cookie</button>
+      </form>
+    </section>
+
+    <section class="mt-4" aria-labelledby="cookie-list-title">
+      <h2 id="cookie-list-title">Збережені cookies</h2>
+      {% if cookies %}
+        <div class="table-responsive">
+          <table class="table table-striped align-middle">
+            <thead><tr><th scope="col">Ключ</th><th scope="col">Значення</th></tr></thead>
+            <tbody>
+              {% for key, value in cookies.items() %}
+                <tr><td>{{ key }}</td><td>{{ value }}</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-flex flex-wrap gap-3">
+          <form method="post" action="{{ url_for('users.delete_cookie') }}" class="d-flex flex-wrap gap-2">
+            <label class="visually-hidden" for="delete-cookie-key">Cookie для видалення</label>
+            <select class="form-select" id="delete-cookie-key" name="key" required>
+              {% for key in cookies %}<option value="{{ key }}">{{ key }}</option>{% endfor %}
+            </select>
+            <button class="btn btn-outline-danger" type="submit">Видалити вибрану</button>
+          </form>
+          <form method="post" action="{{ url_for('users.delete_all_cookies') }}">
+            <button class="btn btn-outline-danger" type="submit">Видалити всі</button>
+          </form>
+        </div>
+      {% else %}
+        <p class="muted">Користувацьких cookies поки немає.</p>
+      {% endif %}
+    </section>
   </section>
 {% endblock %}
