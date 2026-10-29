@@ -1,6 +1,23 @@
-from flask import render_template, request
+import logging
+from pathlib import Path
+
+from flask import flash, redirect, render_template, request, url_for
 
 from . import app
+from .forms import ContactForm
+
+
+def _get_contact_logger():
+    log_dir = Path(app.root_path).parent / "logs"
+    log_dir.mkdir(exist_ok=True)
+
+    logger = logging.getLogger("contact_form")
+    if not logger.handlers:
+        handler = logging.FileHandler(log_dir / "contact.log", encoding="utf-8")
+        handler.setFormatter(logging.Formatter("%(asctime)s %(message)s"))
+        logger.addHandler(handler)
+        logger.setLevel(logging.INFO)
+    return logger
 
 
 @app.route("/")
@@ -21,11 +38,23 @@ def resume():
 
 @app.route("/contacts", methods=["GET", "POST"])
 def contacts():
-    submitted = request.method == "POST"
-    form_data = request.form if submitted else {}
+    form = ContactForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            _get_contact_logger().info(
+                "Contact form: name=%r email=%r topic=%r message=%r",
+                form.name.data,
+                form.email.data,
+                form.topic.data,
+                form.message.data,
+            )
+            flash("Дякуємо! Ваше повідомлення прийнято.", "success")
+            return redirect(url_for("contacts"))
+
+        flash("Перевірте поля форми та виправте помилки.", "danger")
+
     return render_template(
         "contacts.html",
         title="Контакти",
-        submitted=submitted,
-        form_data=form_data,
+        form=form,
     )

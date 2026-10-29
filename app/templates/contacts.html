@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "_macros.html" import render_field %}
 
 {% block content %}
   <section class="contact-heading" aria-labelledby="contacts-title">
@@ -14,7 +15,6 @@
         <h2 id="contact-info-title">Як зі мною зв’язатися</h2>
         <p class="contact-detail"><span class="detail-label">Електронна пошта</span><a href="mailto:student@example.com">student@example.com</a></p>
         <p class="contact-detail"><span class="detail-label">Місце перебування</span>Україна</p>
-        
       </div>
     </section>
 
@@ -23,35 +23,13 @@
         <p class="eyebrow">ФОРМА ЗВОРОТНОГО ЗВ’ЯЗКУ</p>
         <h2 id="message-title">Надіслати повідомлення</h2>
 
-        {% if submitted %}
-          <div class="alert alert-success" role="status">
-            <p class="mb-2">Дякуємо! Отримані дані:</p>
-            <dl class="mb-0">
-              <dt>Ім’я</dt>
-              <dd>{{ form_data.get('name', '') }}</dd>
-              <dt>Електронна пошта</dt>
-              <dd>{{ form_data.get('email', '') }}</dd>
-              <dt>Повідомлення</dt>
-              <dd class="mb-0">{{ form_data.get('message', '') }}</dd>
-            </dl>
-          </div>
-        {% endif %}
-
-        <form action="{{ url_for('contacts') }}" method="post">
-          <div class="mb-3">
-            <label for="name" class="form-label">Ваше ім’я</label>
-            <input class="form-control" type="text" id="name" name="name" autocomplete="name" value="{{ form_data.get('name', '') }}" required>
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Електронна пошта</label>
-            <input class="form-control" type="email" id="email" name="email" autocomplete="email" value="{{ form_data.get('email', '') }}" required>
-          </div>
-          <div class="mb-3">
-            <label for="message" class="form-label">Повідомлення</label>
-            <textarea class="form-control" id="message" name="message" rows="5" required>{{ form_data.get('message', '') }}</textarea>
-          </div>
-          <button class="btn btn-accent" type="submit">Надіслати повідомлення</button>
-          <p class="form-hint mb-0">Форма створена для демонстрації й поки не надсилає дані.</p>
+        <form action="{{ url_for('contacts') }}" method="POST" novalidate>
+          {{ form.hidden_tag() }}
+          {{ render_field(form.name) }}
+          {{ render_field(form.email) }}
+          {{ render_field(form.topic, input_class="form-select") }}
+          {{ render_field(form.message) }}
+          {{ form.submit(class_="btn btn-accent") }}
         </form>
       </div>
     </section>

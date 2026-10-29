@@ -6,6 +6,7 @@ from wtforms.validators import DataRequired, Length, Regexp
 class ContactForm(FlaskForm):
     name = StringField(
         "Ваше ім’я",
+        render_kw={"autocomplete": "name"},
         validators=[
             DataRequired(message="Введіть ім’я."),
             Length(max=80, message="Ім’я має містити не більше 80 символів."),
@@ -13,6 +14,7 @@ class ContactForm(FlaskForm):
     )
     email = StringField(
         "Електронна пошта",
+        render_kw={"autocomplete": "email", "type": "email"},
         validators=[
             DataRequired(message="Введіть електронну пошту."),
             Regexp(
@@ -33,6 +35,7 @@ class ContactForm(FlaskForm):
     )
     message = TextAreaField(
         "Повідомлення",
+        render_kw={"rows": 5, "cols": 40},
         validators=[
             DataRequired(message="Введіть повідомлення."),
             Length(
