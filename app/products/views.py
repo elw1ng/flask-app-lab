@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 
 from . import products_bp
 from .database import add_product, get_product, list_products, remove_product, update_product
-from .forms import ProductForm
+from .forms import DeleteProductForm, ProductForm
 
 
 def _save_image(image):
@@ -76,6 +76,7 @@ def detail(product_id):
         "detail_product.html",
         title=product["name"],
         product=product,
+        delete_form=DeleteProductForm(),
     )
 
 
@@ -120,6 +121,10 @@ def edit(product_id):
 
 @products_bp.route("/<int:product_id>/delete", methods=["POST"])
 def delete(product_id):
+    form = DeleteProductForm()
+    if not form.validate_on_submit():
+        abort(400)
+
     product = get_product(product_id)
     if product is None:
         abort(404)

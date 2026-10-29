@@ -4,6 +4,10 @@ from wtforms import DecimalField, StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length, NumberRange
 
 
+class DeleteProductForm(FlaskForm):
+    pass
+
+
 class ProductForm(FlaskForm):
     name = StringField(
         "Назва товару",

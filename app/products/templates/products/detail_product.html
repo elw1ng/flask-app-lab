@@ -14,7 +14,7 @@
     <div class="d-flex flex-wrap gap-2">
       <a class="btn btn-accent" href="{{ url_for('products.edit', product_id=product.id) }}">Редагувати</a>
       <form action="{{ url_for('products.delete', product_id=product.id) }}" method="POST" novalidate>
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        {{ delete_form.hidden_tag() }}
         <button class="btn btn-outline-danger" type="submit">Видалити</button>
       </form>
       <a class="btn btn-outline-secondary" href="{{ url_for('products.index') }}">До списку товарів</a>
