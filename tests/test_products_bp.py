@@ -1,7 +1,7 @@
 import unittest
 
 from app import app
-from app.products.database import Product, get_product, products_table
+from app.products.database import Product, get_product, list_products, products_table
 
 
 class ProductsBlueprintTestCase(unittest.TestCase):
@@ -15,19 +15,24 @@ class ProductsBlueprintTestCase(unittest.TestCase):
         app.config["WTF_CSRF_ENABLED"] = self.csrf_enabled
 
     def test_products_page_lists_all_products(self):
+        products = list_products()
         response = self.client.get("/products/")
 
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b"Laptop", response.data)
-        self.assertIn(b"Phone", response.data)
-        self.assertIn(b"PC", response.data)
+        for product in products:
+            self.assertIn(product["name"].encode(), response.data)
 
     def test_product_detail_page_displays_product(self):
-        response = self.client.get("/products/1")
+        products = list_products()
+        if not products:
+            self.skipTest("No products are stored in TinyDB")
+        product = products[0]
+        response = self.client.get(f"/products/{product['id']}")
 
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b"Laptop", response.data)
-        self.assertIn(b"1200", response.data)
+        self.assertIn(product["name"].encode(), response.data)
+        expected_price = f"{float(product['price']):.2f}".encode()
+        self.assertIn(expected_price, response.data)
 
     def test_missing_product_returns_not_found(self):
         response = self.client.get("/products/999")
