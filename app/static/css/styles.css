@@ -105,6 +105,9 @@ a { color: var(--accent-dark); }
 .product-price { color: var(--accent-dark); font-size: 1.35rem; font-weight: 700; }
 .product-detail { max-width: 760px; }
 .product-detail h1 { font-size: clamp(2.5rem, 6vw, 4rem); }
+.product-image { width: 100%; max-height: 240px; margin-bottom: 1rem; border-radius: .65rem; object-fit: cover; }
+.product-detail-image { max-width: 480px; max-height: 360px; }
+.product-form-card { max-width: 760px; }
 
 .profile-theme-light { background: #fff; color: #192b3a; }
 .profile-theme-dark {

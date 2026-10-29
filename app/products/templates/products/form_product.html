@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% from "_macros.html" import render_field %}
+
+{% block content %}
+  <section class="content-card product-form-card" aria-labelledby="product-form-title">
+    <p class="eyebrow">BLUEPRINT · PRODUCTS</p>
+    <h1 id="product-form-title">{{ heading }}</h1>
+
+    {% if product and product.image %}
+      <p>Поточне зображення:</p>
+      <img class="product-image product-detail-image mb-3" src="{{ url_for('static', filename='uploads/' ~ product.image) }}" alt="{{ product.name }}">
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data" novalidate>
+      {{ form.hidden_tag() }}
+      {{ render_field(form.name) }}
+      {{ render_field(form.price) }}
+      {{ render_field(form.description) }}
+      {{ render_field(form.image) }}
+      {{ form.submit(class_="btn btn-accent") }}
+      <a class="btn btn-outline-secondary" href="{{ url_for('products.index') }}">Скасувати</a>
+    </form>
+  </section>
+{% endblock %}

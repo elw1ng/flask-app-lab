@@ -5,9 +5,19 @@
 {% block content %}
   <article class="content-card product-detail">
     <p class="eyebrow">PRODUCT · {{ product.id }}</p>
+    {% if product.image %}
+      <img class="product-image product-detail-image" src="{{ url_for('static', filename='uploads/' ~ product.image) }}" alt="{{ product.name }}">
+    {% endif %}
     <h1>{{ product.name }}</h1>
-    <p class="product-price">${{ product.price }}</p>
+    <p class="product-price">{{ "%.2f"|format(product.price) }}</p>
     <p>{{ product.description }}</p>
-    <a class="btn btn-accent" href="{{ url_for('products.index') }}">Back to products</a>
+    <div class="d-flex flex-wrap gap-2">
+      <a class="btn btn-accent" href="{{ url_for('products.edit', product_id=product.id) }}">Редагувати</a>
+      <form action="{{ url_for('products.delete', product_id=product.id) }}" method="POST" novalidate>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="btn btn-outline-danger" type="submit">Видалити</button>
+      </form>
+      <a class="btn btn-outline-secondary" href="{{ url_for('products.index') }}">До списку товарів</a>
+    </div>
   </article>
 {% endblock %}

@@ -1,19 +1,27 @@
 {% extends "base.html" %}
 
-{% block title %}Products · FlaskApp{% endblock %}
+{% block title %}Товари · FlaskApp{% endblock %}
 
 {% block content %}
   <section aria-labelledby="products-title">
     <p class="eyebrow">BLUEPRINT · PRODUCTS</p>
-    <h1 id="products-title">Products</h1>
+    <h1 id="products-title">Товари</h1>
+    <p>Переглядайте товари, додавайте нові або змінюйте наявні.</p>
+    <a class="btn btn-accent" href="{{ url_for('products.create') }}">Додати товар</a>
+
     <div class="products-grid">
       {% for product in products %}
         <article class="content-card product-card">
+          {% if product.image %}
+            <img class="product-image" src="{{ url_for('static', filename='uploads/' ~ product.image) }}" alt="{{ product.name }}">
+          {% endif %}
           <h2>{{ product.name }}</h2>
-          <p class="product-price">${{ product.price }}</p>
+          <p class="product-price">{{ "%.2f"|format(product.price) }}</p>
           <p class="muted">{{ product.description }}</p>
-          <a class="btn btn-accent" href="{{ url_for('products.detail', product_id=product.id) }}">View details</a>
+          <a class="btn btn-accent" href="{{ url_for('products.detail', product_id=product.id) }}">Детальніше</a>
         </article>
+      {% else %}
+        <p>Поки що товарів немає.</p>
       {% endfor %}
     </div>
   </section>
